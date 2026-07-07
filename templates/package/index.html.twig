@@ -10,32 +10,8 @@
 </style>
 
 <div class="example-wrapper">
-    <a href="{{ path('app_package_new') }}">Create new package</a>
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Created_at</th>
-                <th>Category</th>
-                <th>Business</th>
-            </tr>
-        </thead>
+    <a href="{{ path('app_package') }}">Create new package</a>
 
-        <tbody>
-            {% for package in packages %}
-                <tr>
-                    <td>{{ package.id }}</td>
-                    <td>{{ package.name }}</td>
-                    <td>{{ package.description }}</td>
-                    <td>{{ package.price }}</td>
-                    <td>{{ package.createdAt|date('d-m-Y') }}</td>
-                    <td>{{ package.category.name }}</td>
-                    <td>{{ package.business.name }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    {% include 'package/table.html.twig' %}
 </div>
 {% endblock %}

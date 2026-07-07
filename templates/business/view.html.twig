@@ -19,4 +19,15 @@
 
         <a href={{ path('app_business') }}>Back</a>
     </div>
+
+    <div>
+       {% include 'package/table.html.twig' with {
+           packages: business.packages
+       } %}
+    </div>
+
+    <div>
+        <a href="{{ path('app_package_new', {id: business.id}) }}">Create new package</a>
+    </div>
+
 {% endblock %}

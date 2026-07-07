@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Business;
+use App\Entity\Package;
 use App\Form\BusinessFormType;
+use App\Form\PackageFormType;
 use App\Repository\BusinessRepository;
+use App\Repository\PackageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,14 +29,13 @@ final class BusinessController extends AbstractController
     #[Route('/business/{id}', name: 'app_business_view')]
     public function view(Business $business): Response
     {
-        // $business = $businessRepository->find($id);
         return $this->render('business/view.html.twig', [
             'business' => $business,
         ]);
     }
 
     #[Route('/new/business', name: 'app_business_new', methods: ['GET', 'POST'])]
-    public function new(Request $request,EntityManagerInterface $entityManager): Response
+    public function newBusiness(Request $request,EntityManagerInterface $entityManager): Response
     {
         $business = new Business();
         $form = $this->createForm(BusinessFormType::class, $business);
@@ -48,6 +50,27 @@ final class BusinessController extends AbstractController
 
         return $this->render('business/new.html.twig', [
             'form' => $form
+        ]);
+    }
+    #[Route('/business/{id}/new', name:'app_package_new', methods: ['GET','POST'])]
+    public function newPackage(Business $business, Request $request,EntityManagerInterface $entityManager): Response
+    {
+        $package = new Package();
+        $form = $this->createForm(PackageFormType::class, $package);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $package->setBusiness($business);
+            $entityManager->persist($package);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_business_view',[
+                'id' => $business->getId()
+            ]);
+        }
+        return $this->render('package/new.html.twig',[
+            'form' => $form,
+            'business' => $business
         ]);
     }
 }

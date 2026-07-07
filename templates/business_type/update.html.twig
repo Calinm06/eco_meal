@@ -9,15 +9,9 @@
     </style>
 
     <div class="example-wrapper">
-        <a href="{{ path('app_business_type_edit',{
-            id:type.id
-        }) }}">Edit</a>
-        <br>
-        <a href="{{ path('app_business_type_delete',{
-            id:type.id
-        }) }}">Delete</a>
-
-        <p>Id: {{ type.id }}</p>
-        <p>Name: {{ type.name }}</p>
+       {{ form_start(form) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.submit) }}
+        {{ form_end(form) }}
     </div>
 {% endblock %}

@@ -1,0 +1,33 @@
+{% if packages is empty %}
+    <p>This business has no packages</p>
+{% else %}
+
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Created_at</th>
+            <th>Category</th>
+            <th>Business</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+        {% for package in packages %}
+            <tr>
+                <td>{{ package.id }}</td>
+                <td>{{ package.name }}</td>
+                <td>{{ package.description }}</td>
+                <td>{{ package.price }}</td>
+                <td>{{ package.createdAt|date('d-m-Y') }}</td>
+                <td>{{ package.category.name }}</td>
+                <td>{{ package.business.name }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
