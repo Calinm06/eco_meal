@@ -2,7 +2,7 @@
     <p>This business has no packages</p>
 {% else %}
 
-    <table>
+    <table class="table table-dark">
         <thead>
         <tr>
             <th>Name</th>
@@ -16,16 +16,25 @@
 
         <tbody>
 
-
         {% for package in packages %}
             <tr>
-                <td>{{ package.id }}</td>
                 <td>{{ package.name }}</td>
                 <td>{{ package.description }}</td>
                 <td>{{ package.price }}</td>
                 <td>{{ package.createdAt|date('d-m-Y') }}</td>
                 <td>{{ package.category.name }}</td>
                 <td>{{ package.business.name }}</td>
+                <td>
+                    <a href="{{ path('app_package_delete',{'id':package.id}) }}">
+                        <img src="{{ asset('Icons/recycling-bin.png') }}" alt="Trash" width="16" height="16">
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ path('app_package_edit',{'id':package.id}) }}">
+                        <img src="{{ asset('Icons/pen.png') }}" alt="Edit" width="16" height="16">
+                    </a>
+                </td>
+
             </tr>
         {% endfor %}
         </tbody>
