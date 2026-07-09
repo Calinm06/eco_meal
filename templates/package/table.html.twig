@@ -11,8 +11,10 @@
             <th>Created_at</th>
             <th>Category</th>
             <th>Business</th>
-            <th></th>
-            <th></th>
+            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_BUSINESS') %}
+                <th></th>
+                <th></th>
+            {% endif %}
         </tr>
         </thead>
 
@@ -26,16 +28,26 @@
                 <td>{{ package.createdAt|date('d-m-Y') }}</td>
                 <td>{{ package.category.name }}</td>
                 <td>{{ package.business.name }}</td>
-                <td>
-                    <a href="{{ path('app_package_delete',{'id':package.id}) }}">
-                        <img src="{{ asset('Icons/recycling-bin.png') }}" alt="Trash" width="16" height="16">
-                    </a>
-                </td>
-                <td>
-                    <a href="{{ path('app_package_edit',{'id':package.id}) }}">
-                        <img src="{{ asset('Icons/pen.png') }}" alt="Edit" width="16" height="16">
-                    </a>
-                </td>
+                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_BUSINESS') %}
+                    <td>
+                        <a href="{{ path('app_package_delete',{'id':package.id}) }}">
+                            <img src="{{ asset('Icons/recycling-bin.png') }}" alt="Trash" width="16" height="16">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ path('app_package_edit',{'id':package.id}) }}">
+                            <img src="{{ asset('Icons/pen.png') }}" alt="Edit" width="16" height="16">
+                        </a>
+                    </td>
+                {% endif %}
+                {% if app.user and is_granted('ROLE_CONSUMER') %}
+                    <td>
+                        <a href="{{ path('app_order_new',{
+                            package_id: package.id,
+                            consumer_id: app.user.consumer.id
+                        }) }}" ><img src="{{ asset('Icons/cart.png') }}" alt="Buy" width="16" height="16"></a>
+                    </td>
+                {% endif %}
 
             </tr>
         {% endfor %}
