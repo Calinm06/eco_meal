@@ -8,6 +8,7 @@ use App\Repository\CategoryRepository;
 use App\Repository\ConsumerRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -41,4 +42,12 @@ final class ConsumerController extends AbstractController
             'form' => $form
         ]);
     }
+
+//    public function show(Consumer $consumer, Security $security)
+//    {
+//        $this->denyAccessUnlessGranted(['ROLE_CONSUMER','ROLE_ADMIN']);
+//        $user = $security->getUser();
+//
+//        if($user && $user->getConsume)
+//    }
 }
