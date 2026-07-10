@@ -43,6 +43,14 @@ final class ConsumerController extends AbstractController
         ]);
     }
 
+    #[Route('consumer/{id}', name:'app_consumer_view', methods:['GET'])]
+    public function view(Consumer $consumer)
+    {
+        return $this->render('consumer/view.html.twig',[
+            'consumer' => $consumer
+        ]);
+    }
+
 //    public function show(Consumer $consumer, Security $security)
 //    {
 //        $this->denyAccessUnlessGranted(['ROLE_CONSUMER','ROLE_ADMIN']);

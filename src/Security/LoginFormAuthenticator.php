@@ -67,7 +67,9 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 
         if ($this->security->isGranted('ROLE_CONSUMER')) {
             return new RedirectResponse(
-                $this->urlGenerator->generate('app_package')
+                $this->urlGenerator->generate('app_consumer_view',[
+                    'id' => $token->getUser()->getId()
+                ])
             );
         }
 
