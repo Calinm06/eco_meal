@@ -10,8 +10,19 @@
 </style>
 
 <div class="example-wrapper">
-    <a class="btn btn-primary" href="{{ path('app_package') }}">Broken</a>
+    {% if is_granted('ROLE_CONSUMER') %}
+    <a class = "float-end" href="{{ path('app_consumer_view',{id : app.user.consumer.id}) }}">
+        <img src="{{ asset('Icons/user.png') }}" alt="profile" width="32px" height="32px">
+    </a>
+    {% endif %}
 
+    {% if is_granted('ROLE_CONSUMER') %}
+        <h2>Welcome {{ app.user.consumer.firstName }} {{ app.user.consumer.lastName }}</h2>
+    {% elseif is_granted('ROLE_ADMIN') %}
+        <h2>Welcome Admin!</h2>
+    {% endif %}
+
+    <h3>Available packages </h3>
     {% include 'package/table.html.twig'%}
 </div>
 {% endblock %}

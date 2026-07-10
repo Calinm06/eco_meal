@@ -29,9 +29,18 @@ final class PackageController extends AbstractController
         $entityManager->remove($package);
         $entityManager->flush();
 
-        return $this->redirectToRoute('app_business_view',[
-            'id' => $package->getBusiness()->getId()
-        ]);
+        $isAdmin = $this->isGranted('ROLE_ADMIN');
+        $isBusiness = $this->isGranted('ROLE_BUSINESS');
+
+        if($isAdmin){
+            return $this->redirectToRoute('app_package');
+        }
+        else if($isBusiness){
+            return $this->redirectToRoute('app_business_view',[
+                'id' => $package->getBusiness()->getId()
+            ]);
+        }
+        return $this->redirectToRoute('app_package');
     }
 
     #[Route('package/{id}/edit',name: 'app_package_edit', methods: ['GET','POST'])]

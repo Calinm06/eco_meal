@@ -47,6 +47,7 @@ security:
         - {path: ^/business/\d+$, roles: [ROLE_ADMIN, ROLE_BUSINESS]}
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/package, roles: [ROLE_CONSUMER,ROLE_ADMIN] }
 
 
 

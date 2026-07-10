@@ -6,6 +6,7 @@ use App\Entity\Consumer;
 use App\Entity\Order;
 use App\Entity\Package;
 use App\Repository\ConsumerRepository;
+use App\Repository\OrderRepository;
 use App\Repository\PackageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -42,5 +43,22 @@ final class OrderController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute('app_package');
+    }
+
+    #[Route('/order/delete/{consumer_id}/{order_id}', name: 'app_order_delete')]
+    public function delete(int $consumer_id,int $order_id,EntityManagerInterface $entityManager, ConsumerRepository $consumerRepository, OrderRepository $orderRepository)
+    {
+        $consumer = $consumerRepository->find($consumer_id);
+        $order = $orderRepository->find($order_id);
+
+        $entityManager->remove($order);
+        $entityManager->flush();
+
+        $orders = $orderRepository->findAll();
+
+        return $this->render('consumer/view.html.twig',[
+            'consumer' => $consumer,
+            'orders' => $orders
+        ]);
     }
 }

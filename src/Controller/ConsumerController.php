@@ -6,6 +6,7 @@ use App\Entity\Consumer;
 use App\Form\ConsumerFormType;
 use App\Repository\CategoryRepository;
 use App\Repository\ConsumerRepository;
+use App\Repository\OrderRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -46,8 +47,10 @@ final class ConsumerController extends AbstractController
     #[Route('consumer/{id}', name:'app_consumer_view', methods:['GET'])]
     public function view(Consumer $consumer)
     {
+        $orders = $consumer->getOrders();
         return $this->render('consumer/view.html.twig',[
-            'consumer' => $consumer
+            'consumer' => $consumer,
+            'orders' => $orders
         ]);
     }
 
