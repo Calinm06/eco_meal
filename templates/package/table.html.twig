@@ -6,6 +6,7 @@
         <thead>
         <tr>
             <th>Name</th>
+            <th>Photo</th>
             <th>Description</th>
             <th>Price</th>
             <th>Created_at</th>
@@ -23,6 +24,12 @@
         {% for package in packages %}
             <tr>
                 <td>{{ package.name }}</td>
+                <td>
+                    {% if package.photo is not null %}
+
+                        <img src="{{ asset(package.photo) }}" alt="No picture available" width="30" height="30">
+                    {% endif %}
+                </td>
                 <td>{{ package.description }}</td>
                 <td>{{ package.price }}</td>
                 <td>{{ package.createdAt|date('d-m-Y') }}</td>

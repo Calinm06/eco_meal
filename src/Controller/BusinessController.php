@@ -10,6 +10,7 @@ use App\Repository\BusinessRepository;
 use App\Repository\PackageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -53,13 +54,28 @@ final class BusinessController extends AbstractController
         ]);
     }
     #[Route('/business/{id}/new', name:'app_package_new', methods: ['GET','POST'])]
-    public function newPackage(Business $business, Request $request,EntityManagerInterface $entityManager): Response
+    public function newPackage(Business $business, Request $request,EntityManagerInterface $entityManager,
+                               #[Autowire('%kernel.project_dir%/public/uploads/package')] string $pacakgeDir): Response
     {
+
+
         $package = new Package();
         $form = $this->createForm(PackageFormType::class, $package);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+
+            $photo = $form->get('photo')->getData();
+            if($photo){
+                $originalFilename = pathinfo($photo->getClientOriginalName(),PATHINFO_FILENAME);
+                $newFilename = $originalFilename.'-'.uniqid().'.'.$photo->guessExtension();
+                $photo->move($pacakgeDir, $newFilename);
+                $package->setPhoto('uploads/package/'.$newFilename);
+
+            }
+
+
+
             $package->setBusiness($business);
             $entityManager->persist($package);
             $entityManager->flush();
