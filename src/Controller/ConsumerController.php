@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Dto\ConsumerEdit;
 use App\Entity\Consumer;
+use App\Entity\User;
+use App\Form\ConsumerEditFormType;
 use App\Form\ConsumerFormType;
 use App\Form\RegistrationFormType;
 use App\Repository\CategoryRepository;
@@ -46,13 +49,23 @@ final class ConsumerController extends AbstractController
     }
 
     #[Route('consumer/{id}/edit', name:'app_consumer_edit', methods:['GET','POST'])]
-    public function edit(Request $request,Consumer $consumer, EntityManagerInterface $entityManager)
+    public function edit(Request $request,Consumer $consumer, User $user,EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(RegistrationFormType::class,$this->getUser());
+        $consumerEdit = new ConsumerEdit();
+        $consumerEdit->setFirstName($consumer->getFirstName());
+        $consumerEdit->setLastName($consumer->getLastName());
+        $consumerEdit->setPhoneNumber($consumer->getPhoneNumber());
+        $consumerEdit->setEmail($user->getEmail());
+
+        $form = $this->createForm(ConsumerEditFormType::class,$consumerEdit);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            $entityManager->persist($consumer);
+            $consumer->setFirstName($consumerEdit->getFirstName());
+            $consumer->setLastName($consumerEdit->getLastName());
+            $consumer->setPhoneNumber($consumerEdit->getPhoneNumber());
+            $user->setEmail($consumerEdit->getEmail());
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_consumer_view',[
@@ -61,13 +74,13 @@ final class ConsumerController extends AbstractController
         }
 
 
-        return $this->render('registration/register.html.twig',[
-            'registrationForm' => $form
+        return $this->render('consumer/edit.html.twig',[
+            'form' => $form
         ]);
     }
 
     #[Route('consumer/{id}', name:'app_consumer_view', methods:['GET'])]
-    public function view(Consumer $consumer)
+    public function view(Consumer $consumer) : Response
     {
         $orders = $consumer->getOrders();
         return $this->render('consumer/view.html.twig',[
