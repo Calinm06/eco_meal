@@ -60,8 +60,11 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         }
 
         if ($this->security->isGranted('ROLE_BUSINESS')) {
+            $user = $token->getUser();
             return new RedirectResponse(
-                $this->urlGenerator->generate('app_business')
+                $this->urlGenerator->generate('app_business_view',[
+                    'id' => $user->getBusiness()->getId()
+                ])
             );
         }
 

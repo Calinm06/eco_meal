@@ -67,10 +67,6 @@ class PackageRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getPackagesWithoutOrder()
-    {
-
-    }
 
     //    /**
     //     * @return Package[] Returns an array of Package objects
