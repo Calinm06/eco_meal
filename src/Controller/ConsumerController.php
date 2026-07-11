@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Consumer;
 use App\Form\ConsumerFormType;
+use App\Form\RegistrationFormType;
 use App\Repository\CategoryRepository;
 use App\Repository\ConsumerRepository;
 use App\Repository\OrderRepository;
@@ -29,7 +30,7 @@ final class ConsumerController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $consumer = new Consumer();
-        $form = $this->createForm(ConsumerFormType::class,$consumer);
+        $form = $this->createForm(RegistrationFormType::class,$consumer);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
@@ -39,8 +40,29 @@ final class ConsumerController extends AbstractController
             return $this->redirectToRoute('app_consumer');
         }
 
-        return $this->render('consumer/new.html.twig',[
-            'form' => $form
+        return $this->render('registration/register.html.twig',[
+            'registrationForm' => $form
+        ]);
+    }
+
+    #[Route('consumer/{id}/edit', name:'app_consumer_edit', methods:['GET','POST'])]
+    public function edit(Request $request,Consumer $consumer, EntityManagerInterface $entityManager)
+    {
+        $form = $this->createForm(RegistrationFormType::class,$this->getUser());
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($consumer);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_consumer_view',[
+                'id' => $consumer->getId()
+            ]);
+        }
+
+
+        return $this->render('registration/register.html.twig',[
+            'registrationForm' => $form
         ]);
     }
 

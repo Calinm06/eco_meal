@@ -11,6 +11,7 @@
 
 <div class="example-wrapper">
     {% if is_granted('ROLE_CONSUMER') %}
+    {{ form(form_type)}}
     <a class = "float-end" href="{{ path('app_consumer_view',{id : app.user.consumer.id}) }}">
         <img src="{{ asset('Icons/user.png') }}" alt="profile" width="32px" height="32px">
     </a>

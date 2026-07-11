@@ -47,7 +47,7 @@ class Order
         return $this->package_id;
     }
 
-    public function setPackageId(Package $package_id): static
+    public function setPackage(Package $package_id): static
     {
         $this->package_id = $package_id;
 

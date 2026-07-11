@@ -178,7 +178,7 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < 16; $i++) {
             $order = new Order();
             $order->setCreatedAt(new \DateTimeImmutable(sprintf('-%d hours', $i * 3)));
-            $order->setPackageID($packages[$i]);
+            $order->setPackage($packages[$i]);
             $order->setConsumer($consumers[$i % count($consumers)]);
             $manager->persist($order);
         }

@@ -136,7 +136,7 @@ class Package
     {
         // set the owning side of the relation if necessary
         if ($consumer_order->getPackageId() !== $this) {
-            $consumer_order->setPackageId($this);
+            $consumer_order->setPackage($this);
         }
 
         $this->consumer_order = $consumer_order;

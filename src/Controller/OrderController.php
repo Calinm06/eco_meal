@@ -32,12 +32,12 @@ final class OrderController extends AbstractController
         $package = $packageRepository->find($package_id);
         $consumer = $consumerRepository->find($consumer_id);
 
-        $order->setPackageId($package);
+        $order->setPackage($package);
         $order->setConsumer($consumer);
         $order->setCreatedAt(new \DateTimeImmutable());
-
-        $entityManager->remove($package);
-        $entityManager->flush();
+        // de modificat logica
+//        $entityManager->remove($package);
+//        $entityManager->flush();
 
         $entityManager->persist($order);
         $entityManager->flush();
