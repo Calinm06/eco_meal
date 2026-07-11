@@ -25,7 +25,9 @@ class PackageRepository extends ServiceEntityRepository
                     ->leftJoin('p.business','b')
                     ->addSelect('b')
                     ->leftJoin('b.business_type','bt')
-                    ->addSelect('bt');
+                    ->addSelect('bt')
+                    ->leftJoin('p.consumer_order','o')
+                    ->andWhere('o.id IS NULL');
 
         if($filter->getName()){
             $qb->andWhere('p.name LIKE :name')
@@ -63,6 +65,11 @@ class PackageRepository extends ServiceEntityRepository
         }
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function getPackagesWithoutOrder()
+    {
+
     }
 
     //    /**

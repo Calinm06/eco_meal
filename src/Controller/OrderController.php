@@ -48,6 +48,7 @@ final class OrderController extends AbstractController
     #[Route('/order/delete/{consumer_id}/{order_id}', name: 'app_order_delete')]
     public function delete(int $consumer_id,int $order_id,EntityManagerInterface $entityManager, ConsumerRepository $consumerRepository, OrderRepository $orderRepository)
     {
+
         $consumer = $consumerRepository->find($consumer_id);
         $order = $orderRepository->find($order_id);
 
