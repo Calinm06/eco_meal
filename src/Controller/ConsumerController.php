@@ -89,6 +89,14 @@ final class ConsumerController extends AbstractController
         ]);
     }
 
+    #[Route('consumer/{id}/delete', name: 'app_consumer_delete')]
+    public function delete(Consumer $consumer, EntityManagerInterface $entityManager): Response
+    {
+        $entityManager->remove($consumer);
+        $entityManager->flush();
+
+       return $this->redirectToRoute('app_consumer');
+    }
 //    public function show(Consumer $consumer, Security $security)
 //    {
 //        $this->denyAccessUnlessGranted(['ROLE_CONSUMER','ROLE_ADMIN']);

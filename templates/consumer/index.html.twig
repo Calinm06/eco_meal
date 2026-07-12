@@ -9,13 +9,14 @@
 </style>
 
 <div class="example-wrapper">
-    <a href="{{ path('app_consumer_new') }}">Create a new consumer</a>
+{#    <a href="{{ path('app_consumer_new') }}">Create a new consumer</a>#}
     <table class="table table-dark">
         <thead>
             <tr>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Phone Number</th>
+                <th></th>
             </tr>
         </thead>
 
@@ -25,6 +26,11 @@
                     <td>{{ consumer.firstName }}</td>
                     <td>{{ consumer.lastName }}</td>
                     <td>{{ consumer.phoneNumber}}</td>
+                    <td>
+                        <a href="{{ path('app_consumer_delete',{id: consumer.id}) }}">
+                            <img src="{{ asset('Icons/recycling-bin.png') }}" alt="delete" width="16" height="16">
+                        </a>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
