@@ -3,20 +3,28 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    {% form_theme registrationForm 'bootstrap_5_layout.html.twig' %}
+    <div class="loginFormStyle container">
+        <h1>Register</h1>
 
-    {{ form_errors(registrationForm) }}
+        {{ form_errors(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-    {{ form_row(registrationForm.consumer.firstName) }}
-    {{ form_row(registrationForm.consumer.lastName) }}
-    {{ form_row(registrationForm.consumer.phoneNumber) }}
+        {{ form_start(registrationForm) }}
+
+        {{ form_row(registrationForm.email,{'row_attr': {'class': 'mb-2'}}) }}
+        {{ form_row(registrationForm.consumer.firstName, {'row_attr': {'class': 'mb-2'}}) }}
+        {{ form_row(registrationForm.consumer.lastName, {'row_attr': {'class': 'mb-2'}}) }}
+        {{ form_row(registrationForm.consumer.phoneNumber, {'row_attr': {'class': 'mb-2'}}) }}
         {{ form_row(registrationForm.plainPassword, {
+            'row_attr': {'class': 'mb-2'},
             label: 'Password'
         }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+        {{ form_row(registrationForm.agreeTerms, {'row_attr': {'class': 'mb-2'}}) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+        <button type="submit" class="btn btn-primary w-100">Register</button>
+        {{ form_end(registrationForm) }}
+    </div>
+
+
+
 {% endblock %}
