@@ -8,12 +8,35 @@
     /*.example-wrapper code { background: #FFFFFF; padding: 2px 6px; }*/
 </style>
 
-<div class="example-wrapper">
-    <a class="btn btn-primary", href="{{ path('app_business') }}">See all business</a>
-    <a class="btn btn-primary", href="{{ path('app_business_new') }}">Create a business</a>
-    <a class="btn btn-primary", href="{{ path('app_consumer') }}">See all consumers</a>
-    <a class="btn btn-primary", href="{{ path('app_business_type') }}">Manage business types</a>
-    <a class="btn btn-primary", href="{{ path('app_category') }}">Manage categories</a>
-    <a class="btn btn-primary", href="{{ path('app_package') }}">See all packages</a>
-</div>
+
+    <div class="container py-4">
+        <h2 class="mb-4">Admin Dashboard</h2>
+
+        <div class="row g-3">
+            <div class="col-md-4">
+                <div class="p-3 border rounded bg-light">
+                    <h5 class="mb-3">Business</h5>
+                    <a class="btn btn-primary w-100 mb-2" href="{{ path('app_business') }}">See all business</a>
+                    <a class="btn btn-primary w-100" href="{{ path('app_business_new') }}">Create a business</a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="p-3 border rounded bg-light">
+                    <h5 class="mb-3">Consumers</h5>
+                    <a class="btn btn-primary w-100" href="{{ path('app_consumer') }}">See all consumers</a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="p-3 border rounded bg-light">
+                    <h5 class="mb-3">Settings</h5>
+                    <a class="btn btn-primary w-100 mb-2" href="{{ path('app_business_type') }}">Manage business types</a>
+                    <a class="btn btn-primary w-100 mb-2" href="{{ path('app_category') }}">Manage categories</a>
+                    <a class="btn btn-primary w-100" href="{{ path('app_package') }}">See all packages</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
 {% endblock %}
