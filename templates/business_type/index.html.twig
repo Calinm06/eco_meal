@@ -3,18 +3,16 @@
 {% block title %}Hello BusinessTypeController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <a href="{{ path('app_business_type_new') }}">Create new businessType</a>
-    <table>
+<div class="form_wrapper">
+    <a class="btn btn-primary mb-3" href="{{ path('app_business_type_new') }}">Create new business type</a>
+    <table class="table table-light">
         <thead>
-            <tr>
+            <tr class="table-primary">
                 <th>Id</th>
                 <th>Nume</th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
 
@@ -25,6 +23,17 @@
                         { id:type.id
                         }) }}">{{ type.id }}</a></td>
                 <td>{{ type.name }}</td>
+                <td>
+                    <a href="{{ path('app_business_type_delete', {id: type.id}) }}">
+                        <img src="{{ asset('Icons/recycling-bin.png') }}" alt="delete" width="16" height="16">
+                    </a>
+                </td>
+
+                <td>
+                    <a href="{{ path('app_business_type_edit', {id: type.id}) }}">
+                        <img src="{{ asset('Icons/pen.png') }}" alt="edit" width="16" height="16">
+                    </a>
+                </td>
             </tr>
         {% endfor %}
         </tbody>

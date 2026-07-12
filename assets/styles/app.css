@@ -6,3 +6,7 @@ body {
      max-width: 400px;
      padding: 40px;
  }
+
+.form_wrapper { margin: 1em auto; max-width: 50%; font: 18px/1.5 sans-serif; }
+.index_wrapper { margin: 1em auto; max-width: 70%;font: 18px/1.5 sans-serif;}
+.small_form_wrapper { margin: 1em auto; max-width: 30%;font: 18px/1.5 sans-serif;}
