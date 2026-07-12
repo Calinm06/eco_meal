@@ -11,33 +11,8 @@
         <a class="btn btn-primary" href="{{ path('app_package') }}">Back</a>
         <a class="btn btn-primary" href="{{ path('app_consumer_edit',{id: consumer.id}) }}">Edit Profile</a>
         <h2 class="text-left">Welcome {{ consumer.firstName}} {{ consumer.lastName }}!</h2>
-        {% if orders is not empty%}
-            <h3>Your orders: </h3>
-            <table class="table table-dark">
-                <thead>
-                <tr>
-                    <th>Package</th>
-                    <th>Price</th>
-                    <th>Created at</th>
-                    <th></th>
-                </tr>
-                </thead>
-
-                <tbody>
-                {% for order in orders %}
-                    <tr>
-                        <td>{{ order.packageId.name }}</td>
-                        <td>{{ order.packageId.price }}</td>
-                        <td>{{ order.CreatedAt|date("d/m/Y") }}</td>
-                        <td>
-                            <a href="{{ path('app_order_delete',{'order_id':order.id, 'consumer_id': app.user.consumer.id}) }}">
-                                <img src="{{ asset('Icons/recycling-bin.png') }}" alt="Trash" width="16" height="16">
-                            </a>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+        {% if packages is not empty%}
+            {% include 'package/card.html.twig' with {'packages' : packages, 'isOrder' : true} %}
          {% else%}
             <p>Nu ai comenzi</p>
         {% endif %}

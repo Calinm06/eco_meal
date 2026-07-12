@@ -1,0 +1,53 @@
+{% if packages is empty %}
+    <p>There are no packages</p>
+{% else %}
+    <div class="index_wrapper">
+        <div class="row row-cols-md-4 g-4">
+            {% for package in packages %}
+                <div class="col">
+                    <div class="bg-light border border-primary h-100" style="min-height: 300px; max-width: 250px">
+                        <div class="text-center p-1">
+                            {% if package.photo is not null %}
+                                <img src="{{ asset(package.photo) }}" alt="No picture available" width="50%" height="50%">
+                            {% else %}
+                                <p>No image available</p>
+                            {% endif%}
+                        </div>
+                        <div class="p-1">
+                            <p><b>Name</b>: {{ package.name }}</p>
+                            <p><b>Price</b>: {{ package.price }}</p>
+                            <p><b>Created At</b>: {{ package.createdAt|date('d-m-Y') }}</p>
+                            <p><b>Restaurant: </b>{{ package.business.name }}</p>
+                        </div>
+                        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_BUSINESS') %}
+
+                            <div class="d-flex justify-content-center align-items-center p-3">
+                                <a class = "me-4" href="{{ path('app_package_delete',{'id':package.id}) }}">
+                                    <img src="{{ asset('Icons/recycling-bin.png') }}" alt="Trash" width="25" height="25">
+                                </a>
+
+                                <a class = "me-4" href="{{ path('app_package_edit',{'id':package.id}) }}">
+                                    <img src="{{ asset('Icons/pen.png') }}" alt="Edit" width="25" height="25">
+                                </a>
+                            </div>
+
+                        {% endif %}
+
+                        {% if app.user and is_granted('ROLE_CONSUMER') and isOrder == false %}
+                            <div class="text-center">
+                                <a href="{{ path('app_order_new',{
+                                    package_id: package.id,
+                                    consumer_id: app.user.consumer.id
+                                }) }}" ><img src="{{ asset('Icons/cart.png') }}" alt="Buy" width="25" height="25"></a>
+                            </div>
+
+
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+{% endif %}

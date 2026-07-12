@@ -24,6 +24,6 @@
     {% endif %}
 
     <h3>Available packages </h3>
-    {% include 'package/table.html.twig'%}
+    {% include 'package/card.html.twig' with {'isOrder': false} %}
 </div>
 {% endblock %}
