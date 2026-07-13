@@ -1,11 +1,11 @@
 {% if packages is empty %}
     <p>There are no packages</p>
 {% else %}
-    <div class="index_wrapper">
+    <div>
         <div class="row row-cols-md-4 g-4">
             {% for package in packages %}
                 <div class="col">
-                    <div class="bg-light border border-primary h-100" style="min-height: 300px; max-width: 250px">
+                    <div class="bg-light border h-100" style="min-height: 320px; min-width: 25%">
                         <div class="text-center p-1">
                             {% if package.photo is not null %}
                                 <img src="{{ asset(package.photo) }}" alt="No picture available" width="50%" height="50%">
@@ -33,7 +33,7 @@
 
                         {% endif %}
 
-                        {% if app.user and is_granted('ROLE_CONSUMER') and isOrder == false %}
+                        {% if app.user and is_granted('ROLE_CONSUMER')%}
                             <div class="text-center">
                                 <a href="{{ path('app_order_new',{
                                     package_id: package.id,

@@ -3,27 +3,39 @@
 {% block title %}Hello PackageController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 1500px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 
-</style>
 
-<div class="example-wrapper">
+<div class="index_wrapper">
+    <div>
+        {% if is_granted('ROLE_CONSUMER') %}
+            <h2>Welcome {{ app.user.consumer.firstName }} {{ app.user.consumer.lastName }}</h2>
+            <a class = "float-end" href="{{ path('app_consumer_view',{id : app.user.consumer.id}) }}">
+                <img src="{{ asset('Icons/user.png') }}" alt="profile" width="32px" height="32px">
+            </a>
+        {% elseif is_granted('ROLE_ADMIN') %}
+            <h2>Welcome Admin!</h2>
+        {% endif %}
+
+
+    </div>
+
+
     {% if is_granted('ROLE_CONSUMER') %}
-    {{ form(form_type)}}
-    <a class = "float-end" href="{{ path('app_consumer_view',{id : app.user.consumer.id}) }}">
-        <img src="{{ asset('Icons/user.png') }}" alt="profile" width="32px" height="32px">
-    </a>
-    {% endif %}
+        {% form_theme form_type 'bootstrap_5_layout.html.twig' %}
+        <div>
+            {{ form_start(form_type, {attr: {class: 'row row-cols-lg-6 g-3 align-items-center p-2'}}) }}
+            <div class="col">{{ form_row(form_type.name) }}</div>
+            <div class="col">{{ form_row(form_type.minPrice) }}</div>
+            <div class="col">{{ form_row(form_type.maxPrice) }}</div>
+            <div class="col">{{ form_row(form_type.category) }}</div>
+            <div class="col">{{ form_row(form_type.business) }}</div>
+            <div class="col">{{ form_row(form_type.submit) }}</div>
+            {{ form_end(form_type) }}
+        </div>
 
-    {% if is_granted('ROLE_CONSUMER') %}
-        <h2>Welcome {{ app.user.consumer.firstName }} {{ app.user.consumer.lastName }}</h2>
-    {% elseif is_granted('ROLE_ADMIN') %}
-        <h2>Welcome Admin!</h2>
     {% endif %}
 
     <h3>Available packages </h3>
-    {% include 'package/card.html.twig' with {'isOrder': false} %}
+    {% include 'package/card.html.twig' %}
 </div>
 {% endblock %}

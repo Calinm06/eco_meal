@@ -30,8 +30,8 @@ class PackageFormType extends AbstractType
                 'choice_label' => 'name'
             ])
             ->add('photo',FileType::class,[
-                'required' => 'false',
-                'mapped' => 'false',
+                'required' => false,
+                'mapped' => false,
                 'label' => 'Photo'
             ])
             ->add('submit', SubmitType::class);

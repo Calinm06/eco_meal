@@ -1,0 +1,37 @@
+{% if orders is empty %}
+    <p>You have no orders</p>
+{% else %}
+<div>
+    <div class="row row-cols-md-4 g-4">
+        {% for order in orders %}
+            <div class="col">
+                <div class="bg-light border h-100" style="min-height: 320px; min-width: 25%">
+                    <div class="text-center p-1">
+                        {% if order.packageId.photo is not null %}
+                            <img src="{{ asset(order.packageId.photo) }}" alt="No picture available" width="50%" height="50%">
+                        {% else %}
+                            <p>No image available</p>
+                        {% endif%}
+                    </div>
+
+                    <div class="p-1">
+                        <p><b>Name</b>: {{ order.packageId.name }}</p>
+                        <p><b>Price</b>: {{ order.packageId.price }}</p>
+                        <p><b>Created At</b>: {{ order.createdAt|date('d-m-Y') }}</p>
+                        <p><b>Restaurant: </b>{{ order.packageId.business.name }}</p>
+                    </div>
+
+                    <div class="text-center">
+                        <a href="{{ path('app_order_delete',{
+                            consumer_id: app.user.consumer.id,
+                            order_id: order.id
+                        }) }}">
+                            <img src="{{ asset('Icons/recycling-bin.png') }}" alt="delete" width="25" height="25">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}

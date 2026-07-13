@@ -3,19 +3,12 @@
 {% block title %}Hello ConsumerController!{% endblock %}
 
 {% block body %}
-    <style>
-        .example-wrapper { margin: 1em auto; max-width: 1500px; width: 95%; font: 18px/1.5 sans-serif; }
-        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-    </style>
-    <div class="example-wrapper">
+    <div class="index_wrapper">
         <a class="btn btn-primary" href="{{ path('app_package') }}">Back</a>
         <a class="btn btn-primary" href="{{ path('app_consumer_edit',{id: consumer.id}) }}">Edit Profile</a>
         <h2 class="text-left">Welcome {{ consumer.firstName}} {{ consumer.lastName }}!</h2>
-        {% if packages is not empty%}
-            {% include 'package/card.html.twig' with {'packages' : packages, 'isOrder' : true} %}
-         {% else%}
-            <p>Nu ai comenzi</p>
-        {% endif %}
+        <p><b>Your Orders:</b></p>
+        {% include 'order/card.html.twig' %}
     </div>
 
 

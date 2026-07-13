@@ -83,13 +83,10 @@ final class ConsumerController extends AbstractController
     public function view(Consumer $consumer) : Response
     {
         $orders = $consumer->getOrders();
-        $packages = [];
-        foreach($orders as $order){
-            $packages[] = $order->getPackageId();
-        }
+
         return $this->render('consumer/view.html.twig',[
             'consumer' => $consumer,
-            'packages' => $packages
+            'orders' => $orders
         ]);
     }
 
