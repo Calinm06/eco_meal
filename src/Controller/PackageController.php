@@ -34,7 +34,11 @@ final class PackageController extends AbstractController
     #[Route('package/{id}/delete',name: 'app_package_delete')]
     public function delete (Package $package,EntityManagerInterface $entityManager): Response
     {
-        //  $fileSystem = new Filesystem();
+        $photo = $package->getPhoto();
+        if(file_exists($photo)){
+            unlink($photo);
+        }
+
         $entityManager->remove($package);
         $entityManager->flush();
 
@@ -56,6 +60,11 @@ final class PackageController extends AbstractController
     public function edit(Request $request, Package $package, EntityManagerInterface $entityManager,
                          #[Autowire('%kernel.project_dir%/public/uploads/package')] string $pacakgeDir): Response
     {
+        $photo = $package->getPhoto();
+        if(file_exists($photo)){
+            unlink($photo);
+        }
+
         $form = $this->createForm(PackageFormType::class,$package);
         $form->handleRequest($request);
 

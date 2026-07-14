@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BusinessController!{% endblock %}
+
+{% block body %}
+
+    <div class="index_wrapper">
+        <div>Total number of packages: {{ totalPackages }}</div>
+        <div>Total number of orders: {{ numberOfOrders }}</div>
+        <div>Total sum of money: {{ totalSum }}</div>
+       <div>The most bought categoie is {{ categories.name }}</div>
+        {% include 'order/card.html.twig' %}
+    </div>
+{% endblock %}

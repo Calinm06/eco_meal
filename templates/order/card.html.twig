@@ -21,14 +21,14 @@
                         <p><b>Restaurant: </b>{{ order.packageId.business.name }}</p>
                     </div>
 
-                    <div class="text-center">
-                        <a href="{{ path('app_order_delete',{
-                            consumer_id: app.user.consumer.id,
-                            order_id: order.id
-                        }) }}">
-                            <img src="{{ asset('Icons/recycling-bin.png') }}" alt="delete" width="25" height="25">
-                        </a>
-                    </div>
+{#                    <div class="text-center">#}
+{#                        <a href="{{ path('app_order_delete',{#}
+{#                            consumer_id: app.user.consumer.id,#}
+{#                            order_id: order.id#}
+{#                        }) }}">#}
+{#                            <img src="{{ asset('Icons/recycling-bin.png') }}" alt="delete" width="25" height="25">#}
+{#                        </a>#}
+{#                    </div>#}
                 </div>
             </div>
         {% endfor %}

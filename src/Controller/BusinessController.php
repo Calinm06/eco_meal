@@ -89,4 +89,22 @@ final class BusinessController extends AbstractController
             'business' => $business
         ]);
     }
+    #[Route('business/{id}/statistics',name: 'app_business_statistics')]
+    public function statistics(Business $business, BusinessRepository $businessRepository)
+    {
+        $totalPackages = $business->getPackages()->count();
+        $numberOfOrders = $businessRepository->getNumberOfOrders($business);
+        $totalSum = $businessRepository->getTotalSum($business);
+        $mostBoughtCategory = $businessRepository->getMostBoughtCategory($business)[0]->getPackageId()->getCategory();
+        $orders = $businessRepository->getLastDaysOrders($business);
+
+       // dd($mostBoughtCategory);
+        return $this->render('business/statistics.html.twig',[
+            'totalPackages' => $totalPackages,
+            'numberOfOrders' => $numberOfOrders,
+            'totalSum' => $totalSum,
+            'categories' => $mostBoughtCategory,
+            'orders' => $orders
+        ]);
+    }
 }
