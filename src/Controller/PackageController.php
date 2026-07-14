@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -33,6 +34,7 @@ final class PackageController extends AbstractController
     #[Route('package/{id}/delete',name: 'app_package_delete')]
     public function delete (Package $package,EntityManagerInterface $entityManager): Response
     {
+        //  $fileSystem = new Filesystem();
         $entityManager->remove($package);
         $entityManager->flush();
 
@@ -65,6 +67,7 @@ final class PackageController extends AbstractController
                 $newFilename = $originalFilename.'-'.uniqid().'.'.$photo->guessExtension();
                 $photo->move($pacakgeDir, $newFilename);
                 $package->setPhoto('uploads/package/'.$newFilename);
+
             }
 
             $entityManager->persist($package);
