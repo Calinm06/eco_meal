@@ -8,7 +8,8 @@
         <div>Total number of packages: {{ totalPackages }}</div>
         <div>Total number of orders: {{ numberOfOrders }}</div>
         <div>Total sum of money: {{ totalSum }}</div>
-       <div>The most bought categoie is {{ categories.name }}</div>
+       <div>The most bought category is {{ categories }}</div>
+        <div>The orders in the last week:</div>
         {% include 'order/card.html.twig' %}
     </div>
 {% endblock %}

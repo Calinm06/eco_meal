@@ -12,11 +12,11 @@
         <p><b>Phone Number: </b> {{ business.phoneNumber }}</p>
         <p><b>Business Type: </b>{{ business.businessType.name }}</p>
 
-        <a class = "btn btn-primary" href={{ path('app_business_statistics',{id: business.id}) }}>See statistics</a>
-
+        <a class= "btn btn-primary mb-2" href="{{ path('app_package_new', {id: business.id}) }}">Create new package</a>
+        <a class = "btn btn-primary mb-2" href={{ path('app_business_statistics',{id: business.id}) }}>See statistics</a>
+        <h2>Your packages: </h2>
         {% include  'package/card.html.twig' with{'packages' : business.packages}%}
 
-        <a class= "btn btn-primary" href="{{ path('app_package_new', {id: business.id}) }}">Create new package</a>
 
         </div>
 

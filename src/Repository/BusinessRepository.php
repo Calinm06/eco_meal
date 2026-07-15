@@ -18,7 +18,7 @@ class BusinessRepository extends ServiceEntityRepository
         parent::__construct($registry, Business::class);
     }
 
-    public function getNumberOfOrders(Business $business): int //numarul total de comenzi pentru un business
+    public function getNumberOfOrders(Business $business): ?int //numarul total de comenzi pentru un business
     {
         return $this->getEntityManager()->createQueryBuilder()
                     ->select('COUNT(o.consumer)')
@@ -31,7 +31,7 @@ class BusinessRepository extends ServiceEntityRepository
 
     }
 
-    public function getTotalSum(Business $business): int
+    public function getTotalSum(Business $business): ?int
     {
         return $this->getEntityManager()->createQueryBuilder()
                     ->select('SUM(package.price)')
@@ -44,7 +44,7 @@ class BusinessRepository extends ServiceEntityRepository
 
     }
 
-    public function getMostBoughtCategory(Business $business): array
+    public function getMostBoughtCategory(Business $business): ?array
     {
         return $this->getEntityManager()->createQueryBuilder()
                     ->select('o')

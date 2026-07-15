@@ -95,7 +95,12 @@ final class BusinessController extends AbstractController
         $totalPackages = $business->getPackages()->count();
         $numberOfOrders = $businessRepository->getNumberOfOrders($business);
         $totalSum = $businessRepository->getTotalSum($business);
-        $mostBoughtCategory = $businessRepository->getMostBoughtCategory($business)[0]->getPackageId()->getCategory();
+
+        $mostBoughtCategory = $businessRepository->getMostBoughtCategory($business);
+        $category = "Does not exist";
+        if($mostBoughtCategory != null){
+            $category = $mostBoughtCategory[0]->getPackageId()->getCategory()->getName();
+        }
         $orders = $businessRepository->getLastDaysOrders($business);
 
        // dd($mostBoughtCategory);
@@ -103,7 +108,7 @@ final class BusinessController extends AbstractController
             'totalPackages' => $totalPackages,
             'numberOfOrders' => $numberOfOrders,
             'totalSum' => $totalSum,
-            'categories' => $mostBoughtCategory,
+            'categories' => $category,
             'orders' => $orders
         ]);
     }

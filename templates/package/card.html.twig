@@ -7,38 +7,49 @@
                 <div class="col">
                     <div class="bg-light border h-100" style="min-height: 320px; min-width: 25%">
                         <div class="text-center p-1">
+                            <h3>{{ package.business.name }}</h3>
                             {% if package.photo is not null %}
-                                <img src="{{ asset(package.photo) }}" alt="No picture available" width="50%" height="50%">
+                                <img src="{{ asset(package.photo) }}" alt="No picture available" width="100%" height="50%">
                             {% else %}
                                 <p>No image available</p>
                             {% endif%}
                         </div>
-                        <div class="p-1">
-                            <p><b>Name</b>: {{ package.name }}</p>
-                            <p><b>Price</b>: {{ package.price }}</p>
-                            <p><b>Created At</b>: {{ package.createdAt|date('d-m-Y') }}</p>
-                            <p><b>Restaurant: </b>{{ package.business.name }}</p>
+
+                        <div class="ms-2 p-0">
+                            <div class="d-flex">
+                                <p><b>{{ package.name }}</b></p>
+                                <p class="ms-5"><b>{{ package.price }}</b> RON</p>
+                            </div>
+                            <div class="d-flex">
+                                <img class="mt-1" src="{{ asset('Icons/calendar.png') }}" alt="calendar" width="20" height="20">
+                                <p class="ms-2">{{ package.createdAt|date('d-m-Y') }}</p>
+                            </div>
+
+                            <div><small class="text-muted">{{ package.description }}</small></div>
                         </div>
+
                         {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_BUSINESS') %}
 
-                            <div class="d-flex justify-content-center align-items-center p-3">
-                                <a class = "me-4" href="{{ path('app_package_delete',{'id':package.id}) }}">
-                                    <img src="{{ asset('Icons/recycling-bin.png') }}" alt="Trash" width="25" height="25">
+                            <div class="d-flex p-3">
+                                <a class = "me-4 btn btn-danger" href="{{ path('app_package_delete',{'id':package.id}) }}">
+{#                                    <img src="{{ asset('Icons/recycling-bin.png') }}" alt="Trash" width="25" height="25">#}
+                                    Delete
                                 </a>
 
-                                <a class = "me-4" href="{{ path('app_package_edit',{'id':package.id}) }}">
-                                    <img src="{{ asset('Icons/pen.png') }}" alt="Edit" width="25" height="25">
+                                <a class = "me-4 btn btn-primary" href="{{ path('app_package_edit',{'id':package.id}) }}">
+{#                                    <img src="{{ asset('Icons/pen.png') }}" alt="Edit" width="25" height="25">#}
+                                    Edit
                                 </a>
                             </div>
 
                         {% endif %}
 
                         {% if app.user and is_granted('ROLE_CONSUMER')%}
-                            <div class="text-center">
-                                <a href="{{ path('app_order_new',{
+                            <div class="text-center p-3 ">
+                                <a class="btn btn-primary" href="{{ path('app_order_new',{
                                     package_id: package.id,
                                     consumer_id: app.user.consumer.id
-                                }) }}" ><img src="{{ asset('Icons/cart.png') }}" alt="Buy" width="25" height="25"></a>
+                                }) }}" >Order</a>
                             </div>
 
 
