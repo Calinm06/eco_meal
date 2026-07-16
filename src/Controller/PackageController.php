@@ -49,7 +49,7 @@ final class PackageController extends AbstractController
             return $this->redirectToRoute('app_package');
         }
         else if($isBusiness){
-            return $this->redirectToRoute('app_business_view',[
+            return $this->redirectToRoute('app_business_packages',[
                 'id' => $package->getBusiness()->getId()
             ]);
         }
@@ -82,7 +82,9 @@ final class PackageController extends AbstractController
             $entityManager->persist($package);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_package');
+            return $this->redirectToRoute('app_business_packages',[
+                'id' => $package->getBusiness()->getId()
+            ]);
         }
 
         return $this->render('package/edit.html.twig',[

@@ -1,15 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello BusinessController!{% endblock %}
+{% block title %}{{ business.name }}{% endblock %}
 
 {% block body %}
     {% include 'navbars/business.html.twig' %}
-    <div class="index_wrapper">
-        <h1 class="text-center"> Welcome {{ business.name }}!</h1>
-        <p><b>City:</b> {{ business.city }}</p>
-        <p><b>Street</b>: {{ business.street }}</p>
-        <p><b>House Number</b>: {{ business.houseNumber }}</p>
-        <p><b>Phone Number: </b> {{ business.phoneNumber }}</p>
-        <p><b>Business Type: </b>{{ business.businessType.name }}</p>
+    <div class="small_form_wrapper">
+        <h2 class="mb-4">Welcome, {{ business.name }}!</h2>
+
+        <dl class="row card bg-light border p-3 mb-0">
+            <dt class="col text-muted">City</dt>
+            <dd class="col fw-bold">{{ business.city }}</dd>
+            <dt class="col text-muted">Street</dt>
+            <dd class="col fw-bold">{{ business.street }}</dd>
+            <dt class="col text-muted">House Number</dt>
+            <dd class="col fw-bold">{{ business.houseNumber }}</dd>
+            <dt class="col text-muted">Phone Number</dt>
+            <dd class="col fw-bold">{{ business.phoneNumber }}</dd>
+            <dt class="col text-muted">Business Type</dt>
+            <dd class="col fw-bold">{{ business.businessType.name }}</dd>
+        </dl>
     </div>
 {% endblock %}

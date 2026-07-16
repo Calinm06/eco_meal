@@ -68,9 +68,7 @@ final class ConsumerController extends AbstractController
 
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_consumer_view',[
-                'id' => $consumer->getId()
-            ]);
+            return $this->redirectToRoute('app_package');
         }
 
 

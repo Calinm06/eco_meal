@@ -53,8 +53,7 @@ final class OrderController extends AbstractController
 
         $orders = $orderRepository->findAll();
 
-        return $this->render('consumer/view.html.twig',[
-            'consumer' => $consumer,
+        return $this->render('consumer/orders.html.twig',[
             'orders' => $orders
         ]);
     }

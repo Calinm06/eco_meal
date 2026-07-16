@@ -5,11 +5,38 @@
 {% block body %}
     {% include 'navbars/business.html.twig' %}
     <div class="index_wrapper">
-        <div>Total number of packages: {{ totalPackages }}</div>
-        <div>Total number of orders: {{ numberOfOrders }}</div>
-        <div>Total sum of money: {{ totalSum }}</div>
-       <div>The most bought category is {{ categories }}</div>
-        <div>The orders in the last week:</div>
+        <h2 class="mb-4">Statistics</h2>
+
+        <div class="row g-4 mb-4">
+            <div class="col-md-3">
+                <div class="card bg-light border text-center p-3">
+                    <div class="text-muted small">Total Packages</div>
+                    <div class="fs-3 fw-bold text-primary">{{ totalPackages }}</div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card bg-light border text-center p-3">
+                    <div class="text-muted small">Total Orders</div>
+                    <div class="fs-3 fw-bold text-primary">{{ numberOfOrders }}</div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card bg-light border text-center p-3">
+                    <div class="text-muted small">Total Revenue</div>
+                    <div class="fs-3 fw-bold text-primary">{{ totalSum }} RON</div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card bg-light border text-center p-3">
+                    <div class="text-muted small">Top Category</div>
+                    <div class="fs-3 fw-bold text-primary">{{ categories }}</div>
+                </div>
+            </div>
+        </div>
+
+        <h4 class="mb-3">Orders in the last week</h4>
         {% include 'order/card.html.twig' %}
     </div>
 {% endblock %}
+
+

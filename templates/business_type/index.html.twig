@@ -11,7 +11,6 @@
     <table class="table table-light">
         <thead>
             <tr class="table-primary">
-                <th>Id</th>
                 <th>Nume</th>
                 <th></th>
                 <th></th>
@@ -21,9 +20,6 @@
         <tbody>
         {% for type in types %}
             <tr>
-                <td><a href="{{ path('app_business_type_show',
-                        { id:type.id
-                        }) }}">{{ type.id }}</a></td>
                 <td>{{ type.name }}</td>
                 <td>
                     <a href="{{ path('app_business_type_delete', {id: type.id}) }}">

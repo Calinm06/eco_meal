@@ -33,21 +33,35 @@ security:
 
     # Note: Only the *first* matching rule is applied
     access_control:
+        #admin
         - { path: ^/consumer/\d+$, roles: [ROLE_CONSUMER,ROLE_ADMIN] }
         - { path: ^/consumer$, roles: ROLE_ADMIN }
         - { path: ^/business$, roles: ROLE_ADMIN }
-        - { path: ^/business/\d+$, roles: [ROLE_ADMIN,ROLE_BUSINESS] }
-        - {path: ^/new/business, roles: ROLE_ADMIN}
-        - {path: ^/admin, roles: ROLE_ADMIN}
+        - { path: ^/new/business$, roles: ROLE_ADMIN }
+        - { path: ^/businessType$, roles: ROLE_ADMIN }
+        - { path: ^/businessType/new$, roles: ROLE_ADMIN }
+        - { path: ^/businessType/\d+/edit$, roles: ROLE_ADMIN }
+        - { path: ^/businessType/\d+/delete$, roles: ROLE_ADMIN }
         - { path: ^/category, roles: ROLE_ADMIN }
+        - { path: ^/category/new, roles: ROLE_ADMIN }
+        - { path: ^/category/\d+/edit, roles: ROLE_ADMIN }
+        - { path: ^/category/\d+/delete, roles: ROLE_ADMIN }
         - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/businessType, roles: ROLE_ADMIN }
+
 
         #business
         - {path: ^/business/\d+$, roles: [ROLE_ADMIN, ROLE_BUSINESS]}
+        - {path: ^/business/\d+/new$, roles: [ROLE_BUSINESS]}
+        - {path: ^/business/\d+/packages, roles: [ROLE_BUSINESS]}
+        - {path: ^/package/\d+/edit, roles: [ROLE_BUSINESS]}
+        - { path: ^/business/\d+/statistics, roles: [ ROLE_BUSINESS ] }
 
-        - { path: ^/package$, roles: [ROLE_CONSUMER,ROLE_ADMIN] }
+
+
+        #consumer
         - { path: ^/consumer/\d+/edit, roles: ROLE_CONSUMER }
+        - { path: ^/package$, roles:  ROLE_CONSUMER  }
+        - { path: ^/consumer/\d+/orders, roles:  ROLE_CONSUMER  }
 
 
 

@@ -24,7 +24,6 @@ class PackageFormType extends AbstractType
             ->add('name',TextType::class)
             ->add('description', TextType::class)
             ->add('price', NumberType::class)
-            ->add('created_at', DateType::class)
             ->add('category',EntityType::class,[
                 'class' => Category::class,
                 'choice_label' => 'name'

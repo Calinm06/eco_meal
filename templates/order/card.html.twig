@@ -1,46 +1,103 @@
+{#{% if orders is empty %}#}
+{#    <p>You have no orders</p>#}
+{#{% else %}#}
+{#<div>#}
+{#    <div class="row row-cols-md-4 g-4">#}
+{#        {% for order in orders %}#}
+{#            <div class="col">#}
+{#                <div class="bg-light border h-100" style="min-height: 320px; min-width: 25%">#}
+{#                    <div class="text-center p-1">#}
+{#                        <h3>{{ order.packageId.business.name }}</h3>#}
+{#                        {% if order.packageId.photo is not null %}#}
+{#                            <img src="{{ asset(order.packageId.photo) }}" alt="No picture available" width="100%" height="50%">#}
+{#                        {% else %}#}
+{#                            <p>No image available</p>#}
+{#                        {% endif%}#}
+{#                    </div>#}
+
+{#                    <div class="ms-2 p-0">#}
+{#                        <div class="d-flex">#}
+{#                            <p><b>{{ order.packageId.name }}</b></p>#}
+{#                            <p class="ms-5"><b>{{ order.packageId.price }}</b> RON</p>#}
+{#                        </div>#}
+{#                        <div class="d-flex">#}
+{#                            <img class="mt-1" src="{{ asset('Icons/calendar.png') }}" alt="calendar" width="20" height="20">#}
+{#                            <p class="ms-2">{{ order.packageId.createdAt|date('d-m-Y') }}</p>#}
+{#                        </div>#}
+
+{#                        <div><small class="text-muted">{{ order.packageId.description }}</small></div>#}
+{#                    </div>#}
+
+{#                    {% if is_granted('ROLE_CONSUMER') %}#}
+{#                        <div class="text-center p-3">#}
+{#                            <a class="btn btn-danger" href="{{ path('app_order_delete',{#}
+{#                                consumer_id: app.user.consumer.id,#}
+{#                                order_id: order.id#}
+{#                            }) }}">#}
+{#                                Cancel order#}
+{#                            </a>#}
+{#                        </div>#}
+{#                    {% endif %}#}
+{#                </div>#}
+{#            </div>#}
+{#        {% endfor %}#}
+{#    </div>#}
+{#</div>#}
+{#{% endif %}#}
 {% if orders is empty %}
     <p>You have no orders</p>
 {% else %}
-<div>
-    <div class="row row-cols-md-4 g-4">
-        {% for order in orders %}
-            <div class="col">
-                <div class="bg-light border h-100" style="min-height: 320px; min-width: 25%">
-                    <div class="text-center p-1">
-                        <h3>{{ order.packageId.business.name }}</h3>
-                        {% if order.packageId.photo is not null %}
-                            <img src="{{ asset(order.packageId.photo) }}" alt="No picture available" width="100%" height="50%">
-                        {% else %}
-                            <p>No image available</p>
-                        {% endif%}
+    <div>
+        <div class="row row-cols-3">
+            {% for order in orders %}
+                <div class="col">
+                    <div class="bg-light border h-100 d-flex flex-column">
+
+                        <div class="text-center p-1">
+                            <h3 class="text-truncate mb-1">{{ order.packageId.business.name }}</h3>
+                        </div>
+
+                        <div class="text-center" style="height: 180px; overflow: hidden; flex-shrink: 0;">
+                            {% if order.packageId.photo is not null %}
+                                <img src="{{ asset(order.packageId.photo) }}" alt="Photo"
+                                     style="width: 100%; height: 100%; object-fit: cover;">
+                            {% else %}
+                                <div class="bg-secondary bg-opacity-10 d-flex align-items-center justify-content-center h-100">
+                                    <small class="text-muted">No image</small>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="p-2 d-flex flex-column flex-grow-1">
+                            <div class="d-flex justify-content-between">
+                                <p class="mb-0 text-truncate"><b>{{ order.packageId.name }}</b></p>
+                                <p class="mb-0 flex-shrink-0 ms-2"><b>{{ order.packageId.price }}</b> RON</p>
+                            </div>
+
+                            <div class="d-flex mt-1">
+                                <img class="mt-1" src="{{ asset('Icons/calendar.png') }}" alt="calendar" width="16" height="16">
+                                <small class="ms-1">{{ order.packageId.createdAt|date('d-m-Y') }}</small>
+                            </div>
+
+                            <div class="mt-1 flex-grow-1">
+                                <small class="text-muted">{{ order.packageId.description }}</small>
+                            </div>
+
+                            {% if is_granted('ROLE_CONSUMER') %}
+                                <div class="mt-auto pt-2 text-center">
+                                    <a class="btn btn-danger" href="{{ path('app_order_delete',{
+                                        consumer_id: app.user.consumer.id,
+                                        order_id: order.id
+                                    }) }}">
+                                        Cancel order
+                                    </a>
+                                </div>
+                            {% endif %}
+                        </div>
+
                     </div>
-
-                    <div class="ms-2 p-0">
-                        <div class="d-flex">
-                            <p><b>{{ order.packageId.name }}</b></p>
-                            <p class="ms-5"><b>{{ order.packageId.price }}</b> RON</p>
-                        </div>
-                        <div class="d-flex">
-                            <img class="mt-1" src="{{ asset('Icons/calendar.png') }}" alt="calendar" width="20" height="20">
-                            <p class="ms-2">{{ order.packageId.createdAt|date('d-m-Y') }}</p>
-                        </div>
-
-                        <div><small class="text-muted">{{ order.packageId.description }}</small></div>
-                    </div>
-
-                    {% if is_granted('ROLE_CONSUMER') %}
-                        <div class="text-center p-3">
-                            <a class="btn btn-danger" href="{{ path('app_order_delete',{
-                                consumer_id: app.user.consumer.id,
-                                order_id: order.id
-                            }) }}">
-                                Cancel order
-                            </a>
-                        </div>
-                    {% endif %}
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
-</div>
 {% endif %}

@@ -73,7 +73,7 @@ final class BusinessController extends AbstractController
                 $package->setPhoto('uploads/package/'.$newFilename);
 
             }
-
+            $package->setCreatedAt(new \DateTimeImmutable());
             $package->setBusiness($business);
             $entityManager->persist($package);
             $entityManager->flush();

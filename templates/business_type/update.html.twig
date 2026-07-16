@@ -3,9 +3,9 @@
 {% block title %}Hello BusinessTypeController!{% endblock %}
 
 {% block body %}
+    {% include 'navbars/admin.html.twig' %}
     {% form_theme form 'bootstrap_5_layout.html.twig' %}
     <div class="small_form_wrapper">
-        <a class="btn btn-primary mb-3" href="{{ path('app_admin') }}">Return to dashboard</a>
        {{ form_start(form) }}
         {{ form_row(form.name) }}
         {{ form_end(form) }}
