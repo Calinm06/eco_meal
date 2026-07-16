@@ -4,12 +4,12 @@
 
 {% block body %}
 
+{% include 'navbars/admin.html.twig'%}
+
 <div class="index_wrapper">
-    <a class="btn btn-primary mb-3" href="{{ path('app_admin') }}">Back</a>
     <table class="table table-light">
         <thead>
         <tr class="table-primary">
-            <th>Id</th>
             <th>Name</th>
             <th>City</th>
             <th>Street</th>
@@ -21,9 +21,6 @@
         <tbody>
         {% for business in businesses %}
             <tr>
-                <td><a href={{ path('app_business_view',{
-                        id:business.id
-                    }) }}> {{ business.id }}</a></td>
                 <td>{{ business.name }}</td>
                 <td>{{ business.city }}</td>
                 <td>{{ business.street}}</td>

@@ -1,0 +1,19 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light p-3">
+    <a class="navbar-brand" href="{{ path('app_admin') }}">
+            <span class="fs-3 fw-bolder text-primary tracking-wide">
+    EcoMeal<span class="text-secondary-50"></span></span>
+    </a>
+
+    <div class="collapse navbar-collapse">
+        <div class="navbar-nav ms-auto">
+            <div class="nav-item dropdown ms-4">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                    <img src="{{ asset('Icons/user.png') }}" alt="profile" width="32" height="32">
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item text-danger" href="{{ path('app_logout') }}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>

@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    <a class="btn btn-primary mb-3" href="{{ path('app_admin') }}">Return to dashboard</a>
+{% include 'navbars/admin.html.twig'%}
 <div class="small_form_wrapper">
     <a class="btn btn-primary mb-3" href="{{ path('app_category_new') }}">Create new category</a>
     <table class="table table-light">

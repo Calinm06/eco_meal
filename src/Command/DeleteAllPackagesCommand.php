@@ -40,6 +40,10 @@ class DeleteAllPackagesCommand extends Command
 
         $packages = $this->packageRepository->findAll();
         foreach ($packages as $package){
+            $photo = $package->getPhoto();
+            if(file_exists($photo)){
+                unlink($photo);
+            }
             $this->entityManager->remove($package);
         }
         //$this->entityManager->flush();
