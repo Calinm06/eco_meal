@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ConsumerController!{% endblock %}
+
+{% block body %}
+    {% include 'navbars/consumer.html.twig' %}
+    <div class="index_wrapper">
+        <p><b>Your Orders:</b></p>
+        {% include 'order/card.html.twig' %}
+    </div>
+{% endblock %}

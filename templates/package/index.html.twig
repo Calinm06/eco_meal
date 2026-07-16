@@ -4,14 +4,12 @@
 
 {% block body %}
 
+{% include 'navbars/consumer.html.twig' %}
 
 <div class="index_wrapper">
     <div>
         {% if is_granted('ROLE_CONSUMER') %}
             <h2>Welcome {{ app.user.consumer.firstName }} {{ app.user.consumer.lastName }}</h2>
-            <a class = "float-end" href="{{ path('app_consumer_view',{id : app.user.consumer.id}) }}">
-                <img src="{{ asset('Icons/user.png') }}" alt="profile" width="32px" height="32px">
-            </a>
         {% elseif is_granted('ROLE_ADMIN') %}
             <h2>Welcome Admin!</h2>
         {% endif %}

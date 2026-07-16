@@ -3,6 +3,7 @@
 {% block title %}Hello BusinessController!{% endblock %}
 
 {% block body %}
+    {% include 'navbars/consumer.html.twig' %}
     {% form_theme form 'bootstrap_5_layout.html.twig' %}
     <div class="form_wrapper">
         {{ form(form) }}

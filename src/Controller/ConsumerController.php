@@ -98,6 +98,17 @@ final class ConsumerController extends AbstractController
 
        return $this->redirectToRoute('app_consumer');
     }
+
+    #[Route('consumer/{id}/orders', name:'app_consumer_orders')]
+    public function viewOrders(Consumer $consumer) : Response
+    {
+        $orders = $consumer->getOrders();
+
+        return $this->render('consumer/orders.html.twig',[
+            'orders' => $orders
+        ]);
+    }
+
 //    public function show(Consumer $consumer, Security $security)
 //    {
 //        $this->denyAccessUnlessGranted(['ROLE_CONSUMER','ROLE_ADMIN']);
