@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BusinessController!{% endblock %}
+
+{% block body %}
+    {% include 'navbars/business.html.twig' %}
+    <div class="index_wrapper">
+        <h2>Your packages: </h2>
+        {% include  'package/card.html.twig' with{'packages' : packages}%}
+    </div>
+
+{% endblock %}
