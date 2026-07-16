@@ -74,8 +74,6 @@ final class BusinessController extends AbstractController
 
             }
 
-
-
             $package->setBusiness($business);
             $entityManager->persist($package);
             $entityManager->flush();
@@ -110,6 +108,15 @@ final class BusinessController extends AbstractController
             'totalSum' => $totalSum,
             'categories' => $category,
             'orders' => $orders
+        ]);
+    }
+
+    #[Route('business/{id}/packages', name: 'app_business_packages')]
+    public function viewPackages(Business $business)
+    {
+        $packages = $business->getPackages();
+        return $this->render('business/packages.html.twig',[
+            'packages' => $packages
         ]);
     }
 }

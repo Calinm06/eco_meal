@@ -3,21 +3,13 @@
 {% block title %}Hello BusinessController!{% endblock %}
 
 {% block body %}
-
+    {% include 'navbars/business.html.twig' %}
     <div class="index_wrapper">
-        <h1>This is the page for the {{ business.name }} business</h1>
+        <h1 class="text-center"> Welcome {{ business.name }}!</h1>
         <p><b>City:</b> {{ business.city }}</p>
         <p><b>Street</b>: {{ business.street }}</p>
         <p><b>House Number</b>: {{ business.houseNumber }}</p>
         <p><b>Phone Number: </b> {{ business.phoneNumber }}</p>
         <p><b>Business Type: </b>{{ business.businessType.name }}</p>
-
-        <a class= "btn btn-primary mb-2" href="{{ path('app_package_new', {id: business.id}) }}">Create new package</a>
-        <a class = "btn btn-primary mb-2" href={{ path('app_business_statistics',{id: business.id}) }}>See statistics</a>
-        <h2>Your packages: </h2>
-        {% include  'package/card.html.twig' with{'packages' : business.packages}%}
-
-
-        </div>
-
+    </div>
 {% endblock %}

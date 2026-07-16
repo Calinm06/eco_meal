@@ -3,7 +3,7 @@
 {% block title %}Hello BusinessController!{% endblock %}
 
 {% block body %}
-
+    {% include 'navbars/business.html.twig' %}
     <div class="index_wrapper">
         <div>Total number of packages: {{ totalPackages }}</div>
         <div>Total number of orders: {{ numberOfOrders }}</div>
